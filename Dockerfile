@@ -40,7 +40,14 @@ RUN apt-get update && apt-get install -y openssh-server nano supervisor git && p
 	&& drush init -y
 
 # Install mysql-clients && rsync. In order to sync database with the container
-RUN apt-get install -y rsync mysql-client xvfb libfontconfig wkhtmltopdf
+RUN apt-get install -y rsync mysql-client wget libxrender1 libfontconfig1
+
+# Install wkthmltopdf
+RUN wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+    && tar vxf wkhtmltox-0.12.4_linux-generic-amd64.tar.xz \
+	&& cp wkhtmltox/bin/wk* /usr/local/bin/ \
+	&& rm -R wkhtmltox \
+	&& rm  wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
 
 # Install Composer In order to use compose
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
