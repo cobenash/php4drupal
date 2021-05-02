@@ -18,12 +18,17 @@ RUN set -eux; \
 		libpng-dev \
 		libpq-dev \
 		libzip-dev \
+		libwebp-dev \
+		libwebp6 \
+		webp \
+		libmagickwand-dev \
 	; \
 	\
 	docker-php-ext-configure gd \
 		--with-freetype-dir=/usr \
 		--with-jpeg-dir=/usr \
 		--with-png-dir=/usr \
+		--with-webp-dir=/usr \
 	; \
 	\
 	docker-php-ext-install -j "$(nproc)" \
@@ -48,7 +53,7 @@ RUN set -eux; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
 	rm -rf /var/lib/apt/lists/*
-	
+
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
 RUN { \
