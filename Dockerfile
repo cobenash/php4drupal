@@ -18,12 +18,17 @@ RUN set -eux; \
 		libpng-dev \
 		libpq-dev \
 		libzip-dev \
+		libwebp-dev \
+		libwebp6 \
+		webp \
+		libmagickwand-dev \
 	; \
 	\
 	docker-php-ext-configure gd \
 		--with-freetype-dir=/usr \
 		--with-jpeg-dir=/usr \
 		--with-png-dir=/usr \
+		--with-webp-dir=/usr \
 	; \
 	\
 	docker-php-ext-install -j "$(nproc)" \
